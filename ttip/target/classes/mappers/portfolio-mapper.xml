@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="portfolioMapper">
+ 	<resultMap type="portfolioImage" id="imageResultSet">
+  		<result column="AT_NO" property="atNo"/>
+  		<result column="ORIGIN_NAME" property="originName"/>
+  		<result column="CHANGE_NAME" property="changeName"/>
+  		<result column="UPLOAD_DATE" property="uploadDate"/>
+  		<result column="FILE_LEVEL" property="fileLevel"/>
+  		<result column="FILE_TYPE" property="fileType"/>
+  		<result column="REF_NO" property="refNo"/>
+  	</resultMap>
+  	
+  	<resultMap type="portfolio" id="portfolioResultSet">
+  		<result column="PORTFOLIO_NO" property="portfolioNo"/>
+  		<result column="PORTFOLIO_TITLE" property="portfolioTitle"/>
+  		<result column="WORK_YEAR" property="workYear"/>
+  		<result column="WORK_PERIOD" property="workPeriod"/>
+  		<result column="WORK_AREA" property="workArea"/>
+  		<result column="PERIOD_UNIT" property="periodUnit"/>
+  		<result column="EXPLANATION" property="explanation"/>
+  		<result column="CATEGORY_NO" property="detailNo"/>
+  		<result column="PORTFOLIO_IMAGE_NO" property="portfolioImageNo"/>
+  		<result column="USER_NO" property="userNo"/>
+  	</resultMap>
+  	
+  	<resultMap type="detailCategory" id="detailCategoryResultSet">
+  			<result column="DETAIL_NO" property="detailNo"/>
+  			<result column="DETAIL_NAME" property="detailName"/>
+  	</resultMap>
+  	
+  	<resultMap type="profile" id="profileResultSet">
+  		<result column="PROFILE_NO" property="profileNo"/>
+  		<result column="REVIEW_COUNT" property="reviewCount"/>
+  		<result column="REVIEW_AVERAGE" property="reviewAverage"/>
+  		<result column="SUB_SERVICE" property="subService"/>
+  		<result column="MAIN_SERVICE" property="mainService"/>
+  		<result column="ONELINE_INTRO" property="oneLineIntro"/>
+  		<result column="APPROVE_YN" property="approveYN"/>
+  		<result column="PHONE_AVAILABLE" property="phoneAvailable"/>
+  		<result column="SERVICE_DETAIL_CONTENT" property="serviceDetailContent"/>
+  		<result column="CHANGE_NAME" property="changeName"/>
+  		<result column="ADDRESS" property="address"/>
+  	</resultMap>
+  	
+  	
+  	<insert id="uploadImages" parameterType="java.util.List"> 
+		INSERT INTO ATTACHMENT(AT_NO
+		                      ,ORIGIN_NAME
+		                      ,CHANGE_NAME
+		                      ,UPLOAD_DATE
+		                      ,FILE_LEVEL
+		                      ,FILE_TYPE
+		                      ,REF_NO) 
+		SELECT SEQ_ATT.NEXTVAL, A.* 
+		FROM ( 
+		<foreach collection="list" item="item" separator="UNION ALL "> 
+		SELECT #{item.originName} AS ORIGIN_NAME
+			  ,#{item.changeName} AS CHANGE_NAME
+			  ,SYSDATE
+			  ,#{item.fileLevel} AS FILE_LEVEL
+			  ,#{item.fileType} AS FILE_TYPE
+			  ,#{item.refNo} AS REF_NO
+		FROM DUAL 
+		</foreach> 
+		) A 
+	</insert>
+	
+	
+	<insert id="insertPortfolio">
+		INSERT INTO PORTFOLIO(PORTFOLIO_NO
+							 ,PORTFOLIO_TITLE
+							 ,WORK_YEAR
+							 ,WORK_PERIOD
+							 ,EXPLANATION
+							 ,CATEGORY_NO
+							 ,PORTFOLIO_IMAGE_NO
+							 ,USER_NO
+							 ,WORK_AREA
+							 ,PERIOD_UNIT)
+		VALUES (SEQ_PFNO.NEXTVAL
+			   ,#{portfolioTitle}
+			   ,#{workYear}
+			   ,#{workPeriod}
+			   ,#{explanation}
+			   ,#{detailNo}
+			   ,#{portfolioImageNo}
+			   ,#{userNo}
+			   ,#{workArea}
+			   ,#{periodUnit})					 	
+	
+	</insert>
+	
+<!-- 	<select id="selectPortfolio" resultMap="portfolioResultSet"> -->
+<!-- 		SELECT * -->
+<!-- 		FROM PORTFOLIO -->
+<!-- 		WHERE USER_NO = #{userNo} -->
+<!-- 	</select> -->
+	
+	<select id="selectPortfolioImageList" parameterType="portfolio" resultMap="imageResultSet">
+		SELECT *
+		FROM ATTACHMENT
+		JOIN PORTFOLIO ON (REF_NO = USER_NO)
+		WHERE REF_NO = #{userNo}
+		AND FILE_TYPE = 'portfolio-image'
+		AND CATEGORY_NO = #{detailNo}
+	</select>
+	
+	<select id="selectPortfolioList" resultMap="portfolioResultSet">
+		SELECT * 
+		FROM PORTFOLIO
+		WHERE USER_NO = #{userNo}
+	</select>
+	
+	<select id="selectDetailName" resultMap="detailCategoryResultSet">
+		SELECT DETAIL_NAME
+		FROM DETAIL_CATEGORY
+		WHERE DETAIL_NAME = #{portfolioCategory}
+	</select>
+	
+	<select id="selectDetailCategoryList" resultMap="profileResultSet">
+		SELECT MAIN_SERVICE,SUB_SERVICE
+		FROM PROFILE
+		WHERE USER_NO = #{userNo}
+	</select>
+	
+	<select id="selectDetailCategoryNo" resultMap="detailCategoryResultSet">
+		SELECT DETAIL_NO
+		FROM DETAIL_CATEGORY
+		WHERE DETAIL_NAME = #{detailName}
+	</select>
+	
+	<select id="selectDetailNo" resultMap="detailCategoryResultSet">
+		SELECT DETAIL_NO
+		FROM DETAIL_CATEGORY D
+		JOIN PORTFOLIO P ON (DETAIL_NO=P.CATEGORY_NO)
+		WHERE USER_NO = #{userNo}
+	</select>
+	
+	<select id="selectPortfolio" parameterType="portfolio" resultMap="portfolioResultSet">
+		SELECT *
+		FROM PORTFOLIO
+		WHERE CATEGORY_NO = #{detailNo}
+		AND USER_NO = #{userNo}
+	</select>
+	
+	
+ 
+ </mapper>

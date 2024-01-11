@@ -1,0 +1,41 @@
+.reviewBox{
+    width: 100%;
+    min-height: 150px; 
+    
+}
+.reviewBox .reviewContainer{
+    width: 100%;
+    display: grid;
+    grid-template-rows: 40px auto; 
+    grid-row-gap: 30px;
+}
+
+.reviewContainer .reviewItem:nth-child(1){
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr 1fr;
+    width: 28%;
+    grid-column-gap: 10px;
+	    
+}
+.reviewContainer .reviewItem:nth-child(1) .reviewProfile{
+    grid-row: span 2;
+    border-radius: 50%;
+    overflow: hidden;
+
+}
+.reviewProfile .finalSmallProfileImg{
+	width: 100%;
+	height: 100%;
+	
+}
+
+.reviewItem .reviewStar{
+	display: flex;
+	justify-content: start;
+	align-items: center;
+}
+.reviewItem .reviewStar p{
+	padding: 0;
+	margin: 0;
+}

@@ -1,0 +1,163 @@
+div{
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+.finalAllContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.allContainer{
+    width: 50vw;
+}
+.searchBarBox{
+    background-color: beige;
+    width: 100%;
+    height: 28.125rem;
+}
+.mainCategoryNaviBarBox{
+    height: 100px;
+    display: flex;
+    justify-content: center;
+}
+.mainCategoryNaviBarBox ul{
+    height: 100%;
+    width: 60%;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(8,1fr);
+    grid-auto-rows: 100px;
+
+}
+.mainCategoryNaviBarBox .mainCategoryItem{
+    list-style:none;
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+}
+ .hover03:hover {
+     cursor: pointer;
+     margin-top: -5px;
+     text-decoration: none;
+     color: black;
+     width: 100%;
+     height: 100%;
+   }
+   .hover03{
+   	width: 100%;
+     height: 100%;
+     display: flex;
+     flex-direction: column;
+     
+   }
+ .btnImg{
+ 	width:100%;
+ 	height: 66.66%;
+ 	grid-row: span 2;
+ }
+ .mainCategoryName{
+ 	height: 33.33%;
+ 	margin: 0;
+ 	text-align: center;
+ }
+.subCategoryListBox{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-auto-rows: 25vh;
+    grid-gap: 10px;
+}
+.subCategoryItem{
+    border-radius: 5px;
+}
+.portfolioListBox{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-gap: 10px;
+}
+.cardImg{
+    height: 66.66%;
+}
+.subCategoryName{
+    height: 33.33%;
+}
+.portfolioBannerBox{
+    height: 10vh;
+}
+.portfolioBannerContainer{
+    width: 100%;
+    height: 100%;
+    background-image: url("https://assets.cdn.soomgo.com/images/category1/banner-category-1-web-portfolio%403x.png?webp=1");
+    background-size: cover;
+    background-position: center;
+}
+.searchBarBox{
+    background-image: url("https://dmmj3ljielax6.cloudfront.net/upload/requestForm/26a5e44f-64cd-41a9-aba0-c2717d139795.png?webp=1");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.searchBarContainer{
+    width: 50%;
+    height: 50%;
+    color: white;
+}
+.seachBarItem{
+    height: 33.33%;
+    display: flex;
+    justify-content: center;
+}
+
+.searchInput{
+    display: grid;
+    grid-template-columns: 5fr 2fr;
+    width: 50%;
+    margin: 10px 0;
+}
+.searchBar{
+    width: 100%;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.searchBarBtn{
+    width: 100%;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    color: white;
+    background-color: #7752fe;
+}
+#searchIcon{
+    color: white;
+}
+.subCategoryImage{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.portfolioListBox{
+    display: grid;
+    grid-auto-rows: 25vh;
+    grid-template-columns: repeat(4,1fr);
+    
+}
+
+.portfolioListBox .nameAndProfile{
+    background-color: aquamarine;
+    height: 15%;
+}
+.portfolioBox .portfolioPicture{
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    height: 85%;
+    background-color: #7752fe;
+}
+.portfolioBox .portfolioInfo{
+    background-color: blanchedalmond;
+    z-index:1;
+    height: 25%;
+}
