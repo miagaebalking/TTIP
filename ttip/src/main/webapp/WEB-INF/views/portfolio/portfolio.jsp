@@ -402,7 +402,6 @@ ex)전/후 결과, 작업 과정 등" maxlength="100" required></textarea>
 
                 containerElement.appendChild(imgElement);
 				
-	            
             };
             
 		}
